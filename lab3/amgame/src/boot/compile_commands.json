@@ -1,0 +1,38 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-m32",
+      "-fno-pic",
+      "-Os",
+      "-Ttext",
+      "0x7c00",
+      "-I/am/src",
+      "-o",
+      "bootblock.o",
+      "start.S"
+    ],
+    "directory": "/home/czg/Source/seos2021/lab3/abstract-machine/am/src/x86/qemu/boot",
+    "file": "/home/czg/Source/seos2021/lab3/abstract-machine/am/src/x86/qemu/boot/start.S",
+    "output": "/home/czg/Source/seos2021/lab3/abstract-machine/am/src/x86/qemu/boot/bootblock.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-m32",
+      "-fno-pic",
+      "-Os",
+      "-Ttext",
+      "0x7c00",
+      "-I/am/src",
+      "-o",
+      "bootblock.o",
+      "main.c"
+    ],
+    "directory": "/home/czg/Source/seos2021/lab3/abstract-machine/am/src/x86/qemu/boot",
+    "file": "/home/czg/Source/seos2021/lab3/abstract-machine/am/src/x86/qemu/boot/main.c",
+    "output": "/home/czg/Source/seos2021/lab3/abstract-machine/am/src/x86/qemu/boot/bootblock.o"
+  }
+]
