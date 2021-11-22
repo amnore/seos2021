@@ -1,0 +1,21 @@
+#!/bin/sh
+
+if [ -z $smp ]; then
+  smp=4
+fi
+
+echo -ne "$mainargs\0" | dd if=/dev/stdin of="$1" bs=512 count=2 seek=1 conv=notrunc status=none
+image="$1"
+shift
+
+case "$ARCH" in
+    "");&
+    "x86_64-qemu")
+        QEMU="qemu-system-x86_64"
+        ;;
+    "x86-qemu")
+        QEMU="qemu-system-i386"
+        ;;
+esac
+
+$QEMU -drive "format=raw,file=$image" -smp $smp -serial stdio "$@"

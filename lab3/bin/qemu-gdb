@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]; then
+  echo "qemu-gdb <image>"
+  exit 1
+fi
+
+if [ -z $smp ]; then
+  smp=4
+fi
+
+case "$ARCH" in
+    "");&
+    "x86_64-qemu")
+        QEMU="qemu-system-x86_64"
+        ;;
+    "x86-qemu")
+        QEMU="qemu-system-i386"
+        ;;
+esac
+
+echo -ne "$mainargs\0" | dd if=/dev/stdin of="$1" bs=512 count=2 seek=1 conv=notrunc status=none
+setsid "$QEMU" -s -S -drive "format=raw,file=$1" -smp $smp &
+gdb \
+  -ex "target remote localhost:1234" \
+  -ex "set confirm off" \
+  -ex "file $1.elf"
+
+killall "$QEMU" &>/dev/null
